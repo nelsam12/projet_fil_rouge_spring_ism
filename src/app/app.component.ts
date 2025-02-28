@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.component.html',
+  // template: `<h1>Angular 2 App</h1>`,
   styleUrl: './app.component.css'
+  // styles:`h1 { color: #369; }`
 })
 export class AppComponent {
-  title = 'projet_fil_rouge';
+
 }
