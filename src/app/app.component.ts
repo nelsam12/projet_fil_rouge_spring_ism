@@ -20,13 +20,7 @@ import { RouterOutlet } from '@angular/router';
 // Le mot clé export permet de rendre la classe AppComponent accessible depuis d'autres fichiers
 
 
-interface Link {
-  name: string;
-  path: string;
-  class : string; // Optionnel
-  subLinks?: Array<Link>; // Optionnel
-  ariaCurrent?: string; // Optionnel
-}
+
 // Binding de données (data binding) : communication entre le composant et le template
 //    * du composant(fichier ts) vers le template (fichier html) (envoie des données)
           // 1. Interpolation {{}}
@@ -34,18 +28,10 @@ interface Link {
 //    * du template (fichier html) vers le composant(fichier ts) (réception des données)
           // 3. Event binding ()
 //    * les deux sens de communication
-          // 4. Two-way binding [()]  
+          // 4. Two-way binding [()]
 
 export class AppComponent {
   private title: string | null = null;
-  private links: Link[] = [
-    { name: 'Catalogue', path: '/catalogue', class:"nav-item", ariaCurrent: 'page'},
-    { name: 'Detail', path: '/detail', class:"nav-item"}
-  ];
-
-  // constructor() {
-  //   this.title = 'Angular 2 App';
-  // }
 }
 
 

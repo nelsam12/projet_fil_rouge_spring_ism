@@ -1,0 +1,36 @@
+<div class="col mb-5">
+  <div class="card h-100">
+    <!-- Sale badge-->
+    @if (produit.sold) {
+      <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+      </div>
+    }
+
+    <!-- Product image-->
+    <img class="card-img-top" [src]="produit.image" [alt]="produit.name" />
+    <!-- Product details-->
+    <div class="card-body p-4">
+      <div class="text-center">
+        <!-- Product name-->
+        <h5 class="fw-bolder" [textContent]="produit.name"></h5>
+        <!-- Product reviews-->
+        <div class="d-flex justify-content-center small text-warning mb-2">
+          @for (element of Array.from({length : produit.notation}); track $index;) {
+            <div class="bi-star-fill"></div>
+          }
+
+        </div>
+        <!-- Product price-->
+        <span class="text-muted text-decoration-line-through">{{ produit.oldPrice }}</span>
+        {{ produit.newPrice }}
+      </div>
+    </div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+      <div class="text-center d-flex gap-4 justify-content-center">
+        <a class="btn btn-outline-dark mt-auto" href="#">Panier</a>
+        <a class="btn btn-outline-dark mt-auto" (click)="onLoadViewDetail(produit.id)" >Detail</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,12 +10,20 @@ import { RouterModule } from '@angular/router';
 })
 export class NavComponent {
   private title: string | null = null;
-  private links: Array<{ name: string, path: string }> = [
-    { name: 'Catalogue', path: '/catalogue' },
-    { name: 'Detail', path: '/detail' }
+
+  protected links: Link[] = [
+    { name: 'Catalogue', path: '/catalogue', class:"nav-link", ariaCurrent: 'page'},
   ];
 
-  
-  
+  // constructor() {
+  //   this.title = 'Angular 2 App';
+  // }
+}
 
+interface Link {
+  name: string;
+  path: string;
+  class : string; // Optionnel
+  subLinks?: Array<Link>; // Optionnel
+  ariaCurrent?: string; // Optionnel
 }
