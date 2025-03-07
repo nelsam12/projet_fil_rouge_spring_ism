@@ -18,7 +18,7 @@ export class ProduitItemComponent {
   }
 
   onLoadViewDetail(id : number) {
-    this.router.navigateByUrl('/detail');
+    this.router.navigateByUrl(`/catalogue/detail/${id}`);
   }
 
   protected readonly Array = Array;
