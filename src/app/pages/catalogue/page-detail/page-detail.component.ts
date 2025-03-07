@@ -16,6 +16,7 @@ export class PageDetailComponent implements OnInit{
   }
 
   produitDetail? : ProduitDetail
+  qteCom : string = "1"
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['product_id']
@@ -28,8 +29,16 @@ export class PageDetailComponent implements OnInit{
     )
   }
 
-  onValidateQte(){
-    
+  onValidateQte( qte: string){
+    /*Recuperer le valeur saisie
+    1 Coté template => 
+      #nomVariable
+      nomVariable reprente l'objet
+
+    2 Coté Ts =>Two Way DataBinding
+  */
+    alert(this.qteCom)
   }
+  
 
 }
