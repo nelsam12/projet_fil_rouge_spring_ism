@@ -13,4 +13,5 @@ public interface ProduitService {
     Produit findById(Long id);
     Produit save(Produit produit);
     Page<Produit> findByCategorieId(Long categorieId, Pageable pageable);
+    List<Produit> findByCategorieId(Long categorieId);
 }

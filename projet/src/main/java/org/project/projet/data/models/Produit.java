@@ -11,6 +11,7 @@ public class Produit extends AbstractEntity {
     private Float newPrice;
     private Integer quantiteStock;
     private String image;
+    private String description;
     private int notation;
     private boolean sold;
 
