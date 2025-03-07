@@ -40,13 +40,14 @@ public class ProduitMock implements CommandLineRunner {
         p.setOldPrice(3500.02f);
         p.setNewPrice(p.getOldPrice());
         p.setSold(false);
+        p.setDescription("Lorem ipsum description produit");
         p.setNotation(Math.min(i, 4));
         if (i % 2 == 0) {
             p.setSold(true);
             p.setNewPrice(3300.02f);
         }
         p.setQuantiteStock(40);
-//                Relation Produit Categorie
+//      Relation Produit Categorie
         p.setCategorie(c);
         return p;
     }

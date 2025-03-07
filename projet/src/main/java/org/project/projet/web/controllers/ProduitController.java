@@ -22,10 +22,15 @@ public interface ProduitController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getById(@PathVariable Long id);
 
-    @GetMapping("/categorie/{categorieId}")
-    public ResponseEntity<Map<String, Object>> getByCategorieId(@PathVariable Long categorieId,
+    @GetMapping("/categorie/v1/{categorieId}")
+    public ResponseEntity<Map<String, Object>> getByCategorieIdV1(@PathVariable Long categorieId,
                                                                 @PageableDefault Pageable pageable,
                                                                 @RequestParam(defaultValue = "0") int page,
                                                                 @RequestParam(defaultValue = "5")  int size);
 
+    @GetMapping("/categorie/{categorieId}")
+    public ResponseEntity<?> getByCategorieId(@PathVariable Long categorieId);
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> getDetail(@PathVariable Long id);
 }

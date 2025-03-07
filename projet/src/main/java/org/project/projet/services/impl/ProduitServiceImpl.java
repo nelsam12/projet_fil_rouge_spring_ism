@@ -40,4 +40,9 @@ public class ProduitServiceImpl implements ProduitService {
     public Page<Produit> findByCategorieId(Long categorieId, Pageable pageable) {
         return produitRepository.findByCategorieId(categorieId, pageable);
     }
+
+    @Override
+    public List<Produit> findByCategorieId(Long categorieId) {
+        return produitRepository.findByCategorieId(categorieId);
+    }
 }

@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.project.projet.data.models.Produit;
 import org.project.projet.web.dto.response.ProduitCatalogueDto;
+import org.project.projet.web.dto.response.ProduitCatalogueSelectedWithRelatedDto;
 import org.project.projet.web.dto.response.ProduitDto;
 
 @Mapper
@@ -18,5 +19,7 @@ public interface ProduitMapper {
     Produit toEntity(ProduitDto produitDto);
 
     ProduitCatalogueDto toDtoCatalogue(Produit produit);
+
+    ProduitCatalogueSelectedWithRelatedDto toDtoCatalogueSelectedWithRelated(Produit produit);
 
 }
