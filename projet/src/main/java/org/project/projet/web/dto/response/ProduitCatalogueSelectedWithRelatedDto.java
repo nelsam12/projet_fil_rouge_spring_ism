@@ -8,13 +8,6 @@ import java.util.List;
 @Builder
 @Data
 public class ProduitCatalogueSelectedWithRelatedDto {
-    private Long id;
-    private String name;
-    private String  image;
-    private String description;
-    private Float oldPrice;
-    private Float newPrice;
-    private boolean sold;
-    private int stock;
+    private  ProduitCatalogueDto produit;
     private List<ProduitCatalogueDto> relatedProducts;
 }

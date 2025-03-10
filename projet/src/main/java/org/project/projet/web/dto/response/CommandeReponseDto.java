@@ -1,15 +1,12 @@
-package org.project.projet.web.dto.request;
+package org.project.projet.web.dto.response;
 
-import org.project.projet.data.models.Client;
-import org.project.projet.data.models.Detail;
+import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
-public class CommandeRequestDto {
+@Data
+public class CommandeReponseDto {
     private Long id;
     private Float montant;
     private Date date;
-    private Client client;
-    private List<Detail> details;
 }

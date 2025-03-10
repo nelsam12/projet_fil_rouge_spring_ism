@@ -77,11 +77,10 @@ public class ProduitControllerImpl implements ProduitController {
         Long categorieId = produit.getCategorie().getId();
         System.out.println(produit.getDescription());
         var produitSelectedDto = ProduitMapper.INSTANCE.toDtoCatalogueSelectedWithRelated(produit);
-        produitSelectedDto.setDescription(produit.getDescription());
         List<Produit> relatedProduits = produitService.findByCategorieId(categorieId);
         produitSelectedDto.setRelatedProducts(relatedProduits.stream()
                 .map(ProduitMapper.INSTANCE::toDtoCatalogue)
-                        .filter(produitCatalogueDto -> !produitCatalogueDto.getId().equals(produitSelectedDto.getId()))
+                        .filter(produitCatalogueDto -> !produitCatalogueDto.getId().equals(produitSelectedDto.getProduit().getId()))
                 .toList());
         return new ResponseEntity<>(produitSelectedDto, HttpStatus.OK);
     }
