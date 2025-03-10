@@ -11,6 +11,7 @@ public class ProduitCatalogueDto {
     private String  image;
     private Float oldPrice;
     private Float newPrice;
+    private String description;
     private boolean sold;
     private int notation ;
 }

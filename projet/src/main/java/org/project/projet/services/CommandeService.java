@@ -1,13 +1,7 @@
 package org.project.projet.services;
 
-import org.project.projet.data.models.Categorie;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.project.projet.data.models.Commande;
 
-import java.util.List;
-
-public interface CategorieService {
-    Page<Categorie> findAllPaginate(Pageable pageable);
-    List<Categorie> findAll();
-    Categorie findById(Long id);
+public interface CommandeService {
+    Commande create(Commande commande);
 }

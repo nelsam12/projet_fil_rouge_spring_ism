@@ -35,7 +35,7 @@ public class ProduitMock implements CommandLineRunner {
 
     private static Produit getProduit(Categorie c, int i) {
         Produit p = new Produit();
-        p.setName(String.format("Produit_%s", i));
+        p.setName(String.format("Produit_%s de %s", i , c.getName()));
         p.setImage("https://img.freepik.com/photos-gratuite/chaussures_1203-8149.jpg");
         p.setOldPrice(3500.02f);
         p.setNewPrice(p.getOldPrice());

@@ -1,15 +1,21 @@
 package org.project.projet.web.dto.request;
 
-import org.project.projet.data.models.Client;
-import org.project.projet.data.models.Detail;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
+@Data
+@Builder
 public class CommandeRequestDto {
-    private Long id;
+    @NotNull(message = "Le montant est obligatoire")
     private Float montant;
+    @NotNull(message = "La date est obligatoire")
     private Date date;
-    private Client client;
-    private List<Detail> details;
+    @NotNull(message = "L'id du client est obligatoire")
+    private Long clientId;
+    @NotNull(message = "La liste des détails est obligatoire")
+    private List<DetailRequestDto> details;
 }
