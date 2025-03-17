@@ -11,6 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,8 @@ public class ClientMock implements CommandLineRunner {
         List<Commande> commandes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Commande commande = new Commande();
-            commande.setDate(new Date());
+            Date date = new Date();
+            commande.setDate(date);
             commande.setDetails(getDetails(commande));
             commande.setClient(client);
             commande.setMontant((float)commande.getDetails().stream().mapToDouble(Detail::getPrix).sum());

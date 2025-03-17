@@ -41,11 +41,12 @@ public class RestResponse {
             Boolean isLast,
             String type
     ){
+        int[] page = new int[totalPages];
         Map<String, Object> response = new HashMap<>();
         response.put("status", status.value());
         response.put("content", data);
         response.put("currentPage", currentPage);
-        response.put("pages", new int[]{totalPages});
+        response.put("pages", page);
         response.put("totalPages", totalPages);
         response.put("isFirst", isFirst);
         response.put("isLast", isLast);

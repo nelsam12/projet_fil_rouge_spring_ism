@@ -5,8 +5,13 @@ import org.project.projet.data.models.Commande;
 import org.project.projet.data.repository.ClientRepository;
 import org.project.projet.data.repository.CommandeRepository;
 import org.project.projet.data.repository.ProduitRepository;
+import org.project.projet.exceptions.EntityNotFoundExceptions;
 import org.project.projet.services.CommandeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @RequiredArgsConstructor
 @Service
@@ -30,4 +35,26 @@ public class CommandeServiceImpl implements CommandeService {
         }
         return commande;
     }
+
+    @Override
+    public Page<Commande> findByClientPaginate(Long clientId, Pageable pageable) {
+        return commandeRepository.findByClientId(clientId, pageable);
+    }
+
+    @Override
+    public Page<Commande> findAll(Pageable pageable) {
+        return commandeRepository.findAll(pageable);
+    }
+
+    @Override
+    public Commande getById(Long id) {
+        return commandeRepository.findById(id).orElseThrow(() -> new EntityNotFoundExceptions("Command with id " + id + " not found"));
+    }
+
+    @Override
+    public Page<Commande> getByDate(Date date, Pageable pageable) {
+        return commandeRepository.findByDate(date, pageable);
+    }
+
+
 }

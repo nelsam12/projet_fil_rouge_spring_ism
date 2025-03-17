@@ -33,4 +33,5 @@ public interface ProduitController {
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> getDetail(@PathVariable Long id);
+
 }
