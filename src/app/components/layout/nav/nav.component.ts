@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {PanierService} from '../../../shared/services/impl/panier.service';
+import {PanierCatalogue} from '../../../shared/models/catalogue.model';
 
 
 @Component({
@@ -9,15 +11,14 @@ import { RouterModule } from '@angular/router';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  private title: string | null = null;
 
   protected links: Link[] = [
     { name: 'Catalogue', path: '/catalogue', class:"nav-link", ariaCurrent: 'page'},
   ];
 
-  // constructor() {
-  //   this.title = 'Angular 2 App';
-  // }
+  constructor(public panierService: PanierService) {
+
+  }
 }
 
 interface Link {

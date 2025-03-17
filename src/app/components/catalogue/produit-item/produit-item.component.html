@@ -28,7 +28,7 @@
     <!-- Product actions-->
     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
       <div class="text-center d-flex gap-4 justify-content-center">
-        <a class="btn btn-outline-dark mt-auto" href="#">Panier</a>
+        <button class="btn btn-outline-dark mt-auto"  (click) = "onAddPanier(produit)" >Panier</button>
         <a class="btn btn-outline-dark mt-auto" (click)="onLoadViewDetail(produit.id)" >Detail</a>
       </div>
     </div>

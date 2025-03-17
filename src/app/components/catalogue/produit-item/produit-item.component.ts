@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {ProduitCatalogue} from '../../../shared/models/catalogue.model';
+import {PanierService} from '../../../shared/services/impl/panier.service';
 
 @Component({
   selector: 'ism-produit-item',
@@ -14,7 +15,7 @@ export class ProduitItemComponent {
   @Input({alias : "produits", required: true}) produit!: ProduitCatalogue;
 
   // Injection de dépendance
-  constructor(private router : Router) {
+  constructor(private router : Router, private panierService :PanierService) {
   }
 
   onLoadViewDetail(id : number) {
@@ -22,4 +23,11 @@ export class ProduitItemComponent {
   }
 
   protected readonly Array = Array;
+
+  onAddPanier(produit: ProduitCatalogue) {
+    this.panierService.addProduct({
+      ...produit,
+      quantiteCom : 1
+    })
+  }
 }

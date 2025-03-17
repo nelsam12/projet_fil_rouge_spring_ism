@@ -25,4 +25,6 @@ export class PageCatalogueComponent implements OnInit  {
     // this.products = this.catalogueService.produits;
   }
 
+
+
 }

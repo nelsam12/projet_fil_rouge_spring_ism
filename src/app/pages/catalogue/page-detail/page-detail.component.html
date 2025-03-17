@@ -13,21 +13,21 @@
                 </div>
                 <p class="lead">{{produitDetail?.produit?.description}}</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" 
-                        id="inputQuantity" 
-                        type="text" 
-                        value="1" 
-                        style="max-width: 3rem" 
+                    <input class="form-control text-center me-3"
+                        type="text"
+                        value="1"
+                        style="max-width: 3rem"
                         #qteCom
                         (keyup)="onValidateQte(qteCom.value)"
-                        
                     />
-
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button" [disabled]="disabledButton" (click)="onAddPanier()">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
                 </div>
+              <div class="text-danger">
+                {{errorMessage}}
+              </div>
             </div>
         </div>
     </div>

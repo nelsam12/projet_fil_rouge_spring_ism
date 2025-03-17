@@ -4,7 +4,9 @@ export interface ProduitCatalogue {
   image: string;
   description?: string;
   oldPrice: number;
+  quantiteStock : number;
   newPrice: number;
+  quantiteCom?: number;
   sold: boolean;
   notation : number; // On va créer un tableau à partir de ça
 }
@@ -12,4 +14,13 @@ export interface ProduitCatalogue {
 export interface ProduitDetail {
   produit : ProduitCatalogue;
   relatedProducts : ProduitCatalogue[]
+}
+
+
+export interface PanierCatalogue {
+  produits : ProduitCatalogue[];
+  totalPanierHT : number;
+  totalPanierTTC : number;
+  tva : number;
+  date : Date;
 }
