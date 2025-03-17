@@ -75,13 +75,17 @@ public class ProduitControllerImpl implements ProduitController {
            throw new EntityNotFoundExceptions("Aucun produit avec l'id " + id + " n'existe");
         }
         Long categorieId = produit.getCategorie().getId();
-        System.out.println(produit.getDescription());
+
         var produitSelectedDto = ProduitMapper.INSTANCE.toDtoCatalogueSelectedWithRelated(produit);
+        System.out.println(produitSelectedDto);
+        produitSelectedDto.getProduit().setQuantiteStock(produit.getQuantiteStock());
+        System.out.println(produitSelectedDto);
         List<Produit> relatedProduits = produitService.findByCategorieId(categorieId);
         produitSelectedDto.setRelatedProducts(relatedProduits.stream()
                 .map(ProduitMapper.INSTANCE::toDtoCatalogue)
                         .filter(produitCatalogueDto -> !produitCatalogueDto.getId().equals(produitSelectedDto.getProduit().getId()))
                 .toList());
+
         return new ResponseEntity<>(produitSelectedDto, HttpStatus.OK);
     }
 
