@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ProduitItemComponent} from '../../../components/catalogue/produit-item/produit-item.component';
+import {ProduitItemComponent} from '../components/catalogue/produit-item/produit-item.component';
 import {CatalogueService} from '../../../shared/services/impl/catalogue.service';
 import {ProduitCatalogue} from '../../../shared/models/catalogue.model';
 

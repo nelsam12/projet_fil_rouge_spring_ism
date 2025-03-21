@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogueService } from '../../../shared/services/impl/catalogue.service';
 import { ProduitDetail } from '../../../shared/models/catalogue.model';
-import { ProduitItemComponent } from "../../../components/catalogue/produit-item/produit-item.component";
+import { ProduitItemComponent } from "../components/catalogue/produit-item/produit-item.component";
 import {PanierService} from '../../../shared/services/impl/panier.service';
 
 @Component({

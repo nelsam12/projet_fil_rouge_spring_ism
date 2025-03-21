@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {ProduitCatalogue} from '../../../shared/models/catalogue.model';
-import {PanierService} from '../../../shared/services/impl/panier.service';
+import {ProduitCatalogue} from '../../../../../shared/models/catalogue.model';
+import {PanierService} from '../../../../../shared/services/impl/panier.service';
 
 @Component({
   selector: 'ism-produit-item',
