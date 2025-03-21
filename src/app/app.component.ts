@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { PageDetailComponent } from './pages/catalogue/page-detail/page-detail.component';
-import { HeaderComponent } from './components/layout/header/header.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { NavComponent } from './components/layout/nav/nav.component';
+import { HeaderComponent } from './pages/catalogue/components/layout/header/header.component';
+import { FooterComponent } from './pages/catalogue/components/layout/footer/footer.component';
+import { NavComponent } from './shared/components/nav/nav.component';
 import { PageCatalogueComponent } from './pages/catalogue/page-catalogue/page-catalogue.component';
 import { RouterOutlet } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   standalone: true, // Ce composant peut charger d'autres composants
   selector: 'app-root',
-  imports: [HeaderComponent, FooterComponent, NavComponent, RouterOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   // template: `<h1>Angular 2 App</h1>`,
   styleUrl: './app.component.css'

@@ -1,6 +1,7 @@
 import {Observable} from 'rxjs';
-import {ProduitCatalogue} from '../models/catalogue.model';
+import {ProduitDetail, ProduitCatalogue} from '../models/catalogue.model';
 
 export interface ICatalogueService {
   getProductsCatalogues():Observable<ProduitCatalogue[]>;
+  getProductDetailCatalogue(produitId : number):Observable<ProduitDetail>;
 }
