@@ -1,0 +1,41 @@
+<div class="container d-flex justify-content-center align-content-center my-4">
+  <div class="card w-50">
+    <div class="card-body">
+      <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+        <div class="text-danger my-2">{{errorMessage}}</div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input formControlName="login" type="email" class="form-control" id="exampleInputEmail1"
+                 aria-describedby="emailHelp">
+          <div class="text-danger">
+            @if (formLogin.get('login')?.touched && formLogin.get('login')?.invalid) {
+              <span *ngIf="formLogin.get('login')?.errors?.['required']">Champ obligatoire</span>
+              <span *ngIf="formLogin.get('login')?.errors?.['email']">Email invalide</span>
+            }
+          </div>
+
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1">
+          <div class="text-danger">
+            @if (formLogin.get('password')?.touched && formLogin.get('password')?.invalid) {
+              <span *ngIf="formLogin.get('password')?.errors?.['minlength']">
+                  Le mot de passe doit contenir au moins 6 caractères
+              </span>
+              <span *ngIf="formLogin.get('password')?.errors?.['required']">Champ obligatoire</span>
+            }
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="formLogin.invalid || loading">
+          @if (loading) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+          }
+          Login
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
