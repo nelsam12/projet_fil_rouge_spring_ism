@@ -1,0 +1,30 @@
+[33mcommit ae5f8363323d3bc715d4329de9aa1280805db049[m
+Author: nelsam <elolo-nelsam.gumedzoe@ism.edu.sn>
+Date:   Mon Mar 17 06:14:36 2025 +0000
+
+    Commandes Clients, commandes, ....
+
+ .idea/modules.xml                                                                           |   1 [32m+[m
+ projet/src/main/java/org/project/projet/data/mock/ClientMock.java                           |   5 [32m++++[m[31m-[m
+ projet/src/main/java/org/project/projet/data/repository/CommandeRepository.java             |  10 [32m+++++++++[m
+ projet/src/main/java/org/project/projet/data/repository/DetailRespository.java              |  14 [32m+++++++++++++[m
+ projet/src/main/java/org/project/projet/services/ClientService.java                         |  13 [32m++++++++++++[m
+ projet/src/main/java/org/project/projet/services/CommandeService.java                       |  10 [32m+++++++++[m
+ projet/src/main/java/org/project/projet/services/DetailService.java                         |  15 [32m++++++++++++++[m
+ projet/src/main/java/org/project/projet/services/impl/ClientServiceImpl.java                |  32 [32m++++++++++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/services/impl/CommandeServiceImpl.java              |  27 [32m++++++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/services/impl/DetailServiceImpl.java                |  27 [32m++++++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/utils/mappers/ClientMapper.java                     |  22 [32m++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/utils/mappers/CommandeMapper.java                   |   8 [32m+++++++[m
+ projet/src/main/java/org/project/projet/utils/mappers/DetailMapper.java                     |  13 [32m++++++++++++[m
+ projet/src/main/java/org/project/projet/web/controllers/ClientController.java               |  26 [32m+++++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/web/controllers/CommandeController.java             |  29 [32m+++++++++++++++++++++++[m[31m---[m
+ projet/src/main/java/org/project/projet/web/controllers/ProduitController.java              |   1 [32m+[m
+ projet/src/main/java/org/project/projet/web/controllers/impl/ClientControllerImpl.java      |  70 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ projet/src/main/java/org/project/projet/web/controllers/impl/CommandeControllerImpl.java    | 136 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m[31m--[m
+ projet/src/main/java/org/project/projet/web/dto/RestResponse.java                           |   3 [32m++[m[31m-[m
+ projet/src/main/java/org/project/projet/web/dto/response/ClientSampleDto.java               |  12 [32m+++++++++++[m
+ projet/src/main/java/org/project/projet/web/dto/response/ClientWithCommandePaginateDto.java |  13 [32m++++++++++++[m
+ projet/src/main/java/org/project/projet/web/dto/response/CommandeReponseWithDetailDto.java  |  14 [32m+++++++++++++[m
+ projet/src/main/java/org/project/projet/web/dto/response/DetailCommandeResponse.java        |  12 [32m+++++++++++[m
+ 23 files changed, 506 insertions(+), 7 deletions(-)
