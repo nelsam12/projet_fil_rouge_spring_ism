@@ -26,15 +26,16 @@ public class ProduitControllerImpl implements ProduitController {
     public ResponseEntity<?> getAll() {
         var produitsDto = produitService.findAll().stream().map(ProduitMapper.INSTANCE::toDtoCatalogue);
 
-//        Map<String, Object> response = RestResponse.response(
-//                HttpStatus.OK,
-//                produitsDto,
-//                "ProduitCatalogueDto"
-//        );
+        Map<String, Object> response = RestResponse.response(
+                HttpStatus.OK,
+                produitsDto,
+                "ProduitCatalogueDto"
+        );
 
-        return new ResponseEntity<>(produitsDto, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // GetAll
     @Override
     public ResponseEntity<Map<String, Object>> getAll(Pageable pageable, int page, int size) {
         Page<Produit> result = produitService.findAllPaginate(PageRequest.of(page, size));
@@ -68,6 +69,7 @@ public class ProduitControllerImpl implements ProduitController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    // GetDetail
     @Override
     public ResponseEntity<?> getDetail(Long id) {
         Produit produit = produitService.findById(id);
@@ -77,22 +79,24 @@ public class ProduitControllerImpl implements ProduitController {
         Long categorieId = produit.getCategorie().getId();
 
         var produitSelectedDto = ProduitMapper.INSTANCE.toDtoCatalogueSelectedWithRelated(produit);
-        System.out.println(produitSelectedDto);
         produitSelectedDto.getProduit().setQuantiteStock(produit.getQuantiteStock());
-        System.out.println(produitSelectedDto);
         List<Produit> relatedProduits = produitService.findByCategorieId(categorieId);
         produitSelectedDto.setRelatedProducts(relatedProduits.stream()
                 .map(ProduitMapper.INSTANCE::toDtoCatalogue)
                         .filter(produitCatalogueDto -> !produitCatalogueDto.getId().equals(produitSelectedDto.getProduit().getId()))
                 .toList());
-
-        return new ResponseEntity<>(produitSelectedDto, HttpStatus.OK);
+        var response = RestResponse.response(
+                HttpStatus.OK,
+                produitSelectedDto,
+                "ProduitDetailDto"
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     //    Simplification du code
     private ResponseEntity<Map<String, Object>> getMapResponseEntity(Page<Produit> result) {
         var produitsDto = result.getContent().stream().map(ProduitMapper.INSTANCE::toDto);
-        Map<String, Object> response = RestResponse.responsePaginate(
+        var response = RestResponse.responsePaginate(
                 HttpStatus.OK,
                 produitsDto,
                 result.getNumber(),

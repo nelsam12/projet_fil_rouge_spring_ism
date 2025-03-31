@@ -18,7 +18,7 @@ public interface CommandeController {
     @GetMapping("/client/{id}")
     ResponseEntity<?> getByClientId(@PathVariable Long id,
                                     @RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "3") int size);
+                                    @RequestParam(defaultValue = "10") int size);
 
     @GetMapping("")
     ResponseEntity<?> getAll(

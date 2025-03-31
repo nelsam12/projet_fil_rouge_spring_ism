@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,10 +46,9 @@ public class ClientMock implements CommandLineRunner {
 
     public List<Commande> getCommandes(Client client) {
         List<Commande> commandes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Commande commande = new Commande();
-            Date date = new Date();
-            commande.setDate(date);
+            commande.setDate(LocalDate.now());
             commande.setDetails(getDetails(commande));
             commande.setClient(client);
             commande.setMontant((float)commande.getDetails().stream().mapToDouble(Detail::getPrix).sum());

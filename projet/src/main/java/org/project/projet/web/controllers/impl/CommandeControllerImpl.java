@@ -4,15 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.project.projet.data.models.Client;
 import org.project.projet.data.models.Commande;
 import org.project.projet.data.models.Detail;
+import org.project.projet.data.models.Produit;
 import org.project.projet.services.ClientService;
 import org.project.projet.services.CommandeService;
 import org.project.projet.services.DetailService;
 import org.project.projet.utils.mappers.ClientMapper;
 import org.project.projet.utils.mappers.CommandeMapper;
 import org.project.projet.utils.mappers.DetailMapper;
+import org.project.projet.utils.mappers.ProduitMapper;
+import org.project.projet.utils.mappers.impl.MyCommandeMapper;
 import org.project.projet.web.controllers.CommandeController;
 import org.project.projet.web.dto.RestResponse;
 import org.project.projet.web.dto.request.CommandeRequestDto;
+import org.project.projet.web.dto.response.ClientSampleDto;
 import org.project.projet.web.dto.response.ClientWithCommandePaginateDto;
 import org.project.projet.web.dto.response.CommandeReponseWithDetailDto;
 import org.project.projet.web.dto.response.DetailCommandeResponse;
@@ -27,6 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +45,10 @@ public class CommandeControllerImpl implements CommandeController {
     private final CommandeService commandeService;
     private final DetailService detailService;
     private final ClientService clientService;
+
     @Override
     public ResponseEntity<?> create(CommandeRequestDto commandeRequestDto, BindingResult bindingResult) {
+        System.out.println(commandeRequestDto);
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -48,12 +56,19 @@ public class CommandeControllerImpl implements CommandeController {
             }
             return ResponseEntity.badRequest().body(errors);
         }
-        var commande = CommandeMapper.INSTANCE.toEntity(commandeRequestDto);
+        Commande commande = MyCommandeMapper.toEntity(commandeRequestDto);
+
         commande = commandeService.create(commande);
         if (commande == null) {
             return ResponseEntity.badRequest().body("Le client n'existe pas");
         }
-        return new ResponseEntity<>(org.project.projet.utils.mappers.CommandeMapper.INSTANCE.toDto(commande), HttpStatus.CREATED);
+        var commandeDto = org.project.projet.utils.mappers.CommandeMapper.INSTANCE.toDto(commande);
+        var result = RestResponse.response(
+                HttpStatus.CREATED,
+                commandeDto,
+                "CommandeResponse"
+        );
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @Override
@@ -62,44 +77,73 @@ public class CommandeControllerImpl implements CommandeController {
         if (client == null) {
             return ResponseEntity.notFound().build();
         }
-        Page<Commande> commandePage = commandeService.findByClientPaginate(client.getId(), PageRequest.of(page, size));
-        ClientWithCommandePaginateDto response = ClientWithCommandePaginateDto.builder()
-                .commandes(commandePage.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList())
-                .client(ClientMapper.INSTANCE.toDto(client))
-                .build()
-                ;
 
-        var result = RestResponse.responsePaginate(
-                HttpStatus.OK,
-                response,
-                commandePage.getNumber(),
-                commandePage.getTotalPages(),
-                commandePage.isFirst(),
-                commandePage.isLast(),
-                "ClientWithCommandePaginate"
-        ) ;
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        Page<Commande> commandePage = commandeService.findByClientPaginate(client.getId(), PageRequest.of(page, size));
+//        ClientWithCommandePaginateDto response = ClientWithCommandePaginateDto.builder()
+//                .commandes(commandePage.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList())
+//                .client(ClientMapper.INSTANCE.toDto(client))
+//                .build();
+        ClientSampleDto clientSampleDto = ClientMapper.INSTANCE.toDto(client);
+        var response = getMapResponseEntity(commandePage, clientSampleDto, "ClientWithCommandePaginate");
+
+//        var result = RestResponse.responsePaginate(
+//                HttpStatus.OK,
+//                response,
+//                commandePage.getNumber(),
+//                commandePage.getTotalPages(),
+//                commandePage.isFirst(),
+//                commandePage.isLast(),
+//                "ClientWithCommandePaginate"
+//        ) ;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+//    @Override
+//    public ResponseEntity<?> getAll(int page, int size) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<Commande> commandePage = commandeService.findAll(pageable);
+//        var data = commandePage.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList();
+//        var currentPage = commandePage.getNumber();
+//        var totalPages = commandePage.getTotalPages();
+//        var isFirst = commandePage.isFirst();
+//        var isLast = commandePage.isLast();
+//        return new ResponseEntity<>(
+//                RestResponse.responsePaginate(
+//                        HttpStatus.OK,
+//                        data,
+//                        currentPage,
+//                        totalPages,
+//                        isFirst,
+//                        isLast,
+//                        "CommandeResponseDtoPaginate"
+//                ),
+//                HttpStatus.OK
+//        );
+//    }
 
     @Override
     public ResponseEntity<?> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Commande> commandePage = commandeService.findAll(pageable);
         var data = commandePage.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList();
-        var currentPage = commandePage.getNumber();
-        var totalPages = commandePage.getTotalPages();
-        var isFirst = commandePage.isFirst();
-        var isLast = commandePage.isLast();
+        System.out.println(data);
+//        var currentPage = commandePage.getNumber();
+//        var totalPages = commandePage.getTotalPages();
+//        var isFirst = commandePage.isFirst();
+//        var isLast = commandePage.isLast();
+        var response = getMapResponseEntity(commandePage, null, "UserWithCommandePaginate");
+//        ClientWithCommandePaginateDto
         return new ResponseEntity<>(
-                RestResponse.responsePaginate(
-                        HttpStatus.OK,
-                        data,
-                        currentPage,
-                        totalPages,
-                        isFirst,
-                        isLast,
-                        "CommandeResponseDtoPaginate"
-                ),
+//                RestResponse.responsePaginate(
+//                        HttpStatus.OK,
+//                        data,
+//                        currentPage,
+//                        totalPages,
+//                        isFirst,
+//                        isLast,
+//                        "CommandeResponseDtoPaginate"
+//                ),
+                response,
                 HttpStatus.OK
         );
     }
@@ -116,14 +160,14 @@ public class CommandeControllerImpl implements CommandeController {
                     .id(detail.getId())
                     .build();
         }).toList();
-        System.out.println(detailCommandeResponses);
+
         var result = CommandeReponseWithDetailDto.builder()
                 .commande(commande)
                 .details(detailCommandeResponses)
                 .build();
         var currentPage = detailPage.getNumber();
         var totalItems = detailPage.getTotalPages();
-        var isFirst=        detailPage.isFirst();
+        var isFirst = detailPage.isFirst();
         var isLast = detailPage.isLast();
         return new ResponseEntity<>(
                 RestResponse.responsePaginate(
@@ -142,19 +186,18 @@ public class CommandeControllerImpl implements CommandeController {
     @Override
     public ResponseEntity<?> getByDate(String date, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Date dateObjet= null;
+        LocalDate localDate;
         try {
-            dateObjet = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+            localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Format de date invalide. Utilise yyyy/MM/dd.");
         }
-        System.out.println(dateObjet.getDate());
-        Page<Commande> commandePage = commandeService.getByDate(dateObjet, pageable);
-
+        Page<Commande> commandePage = commandeService.getByDate(localDate, pageable);
+        var content = commandePage.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList();
         return new ResponseEntity<>(
                 RestResponse.responsePaginate(
                         HttpStatus.OK,
-                        commandePage.getContent(),
+                        content,
                         commandePage.getNumber(),
                         commandePage.getTotalPages(),
                         commandePage.isFirst(),
@@ -164,6 +207,39 @@ public class CommandeControllerImpl implements CommandeController {
                 HttpStatus.OK
 
         );
-
     }
+
+    //    Simplification du code
+//    private ResponseEntity<Map<String, Object>> getMapResponseEntity(Page<Commande> result) {
+//        var commandeDto = result.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList();
+//        var response = RestResponse.responsePaginate(
+//                HttpStatus.OK,
+//                commandeDto,
+//                result.getNumber(),
+//                result.getTotalPages(),
+//                result.isFirst(),
+//                result.isLast(),
+//                "CommandePaginateDto"
+//        );
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+    private Map<String, Object> getMapResponseEntity(Page<Commande> result, ClientSampleDto client, String type) {
+        ClientWithCommandePaginateDto response = ClientWithCommandePaginateDto.builder()
+                .commandes(result.getContent().stream().map(CommandeMapper.INSTANCE::toDto).toList())
+                .client(client)
+                .build();
+        return RestResponse.responsePaginate(
+                HttpStatus.OK,
+                response,
+                result.getNumber(),
+                result.getTotalPages(),
+                result.isFirst(),
+                result.isLast(),
+                type
+        );
+    }
+
+    /*
+     * */
 }

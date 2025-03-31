@@ -8,6 +8,11 @@ import java.util.List;
 @Data
 @Builder
 public class ClientWithCommandePaginateDto {
-    private ClientSampleDto client;
-    List<CommandeReponseDto> commandes;
+  private ClientSampleDto client;
+  private List<CommandeReponseDto> commandes;
+//  private Integer currentPage;
+//  private Integer totalPages;
+//  private Boolean isFirst;
+//  private Boolean isLast;
+//  private int[] pages;
 }

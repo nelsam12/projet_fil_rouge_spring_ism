@@ -6,7 +6,7 @@ import org.project.projet.web.dto.request.CommandeRequestDto;
 
 import java.util.stream.Collectors;
 
-public class CommandeMapper {
+public class MyCommandeMapper {
     public static Commande toEntity(CommandeRequestDto requestDto) {
         Client client = new Client();
         client.setId(requestDto.getClientId());

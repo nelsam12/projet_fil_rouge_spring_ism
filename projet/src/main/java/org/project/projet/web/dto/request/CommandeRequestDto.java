@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -13,7 +13,7 @@ public class CommandeRequestDto {
     @NotNull(message = "Le montant est obligatoire")
     private Float montant;
     @NotNull(message = "La date est obligatoire")
-    private Date date;
+    private LocalDate date;
     @NotNull(message = "L'id du client est obligatoire")
     private Long clientId;
     @NotNull(message = "La liste des détails est obligatoire")

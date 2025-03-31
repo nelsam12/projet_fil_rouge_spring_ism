@@ -16,7 +16,7 @@ public class RestResponse {
     ) {
         Map<String, Object> response = new HashMap<>();
         response.put("status", status.value());
-        response.put("content", data);
+        response.put("data", data);
         response.put("type", type);
         return response;
     }
@@ -44,7 +44,7 @@ public class RestResponse {
         int[] page = new int[totalPages];
         Map<String, Object> response = new HashMap<>();
         response.put("status", status.value());
-        response.put("content", data);
+        response.put("data", data);
         response.put("currentPage", currentPage);
         response.put("pages", page);
         response.put("totalPages", totalPages);
